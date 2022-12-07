@@ -6,6 +6,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("", include("pages.urls")),
+    path("image_recognition/", include("image_recognition.urls")),
 ]
 
 if settings.DEBUG:

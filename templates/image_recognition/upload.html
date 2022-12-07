@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+
+<!--- upload file form -->
+<div class="container">
+  <div class="row">
+    <div>
+      <div class="card w mb-4 shadow-sm">
+        <div class="card-body">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group my-4
+            ">
+              <label for="image">Wybierz obraz</label>
+              <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Wyślij</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
