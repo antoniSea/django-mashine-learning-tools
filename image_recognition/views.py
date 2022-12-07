@@ -2,12 +2,19 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Image
 from django.template import loader
+from django.core.paginator import Paginator
 
 def index(request):
   images = Image.objects.all()
+  paginator = Paginator(images, 6) # Show 6 contacts per page.
+
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
   template = loader.get_template('image_recognition/index.html')
+
   context = {
-    'images': images,
+    'images': page_obj,
+    'page_obj': page_obj
   }
 
   return HttpResponse(template.render(context, request))
