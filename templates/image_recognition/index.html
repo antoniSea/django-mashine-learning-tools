@@ -9,6 +9,8 @@
     <a href="/image_recognition/upload" class="btn btn-secondary m-2">Dodaj obraz</a>
     <a href="/image_recognition/list" class="btn btn-secondary m-2">Lista dostępnych klasyfikacji</a>
     <a href="/image_recognition/train" class="btn btn-secondary m-2">Trenuj</a>
+    
+    {% if images.0 %}
     <div class="row">
       {% for image in images %}
       <div class="col-md-4">
@@ -29,6 +31,7 @@
       {% endfor %}
     </div>
 
+    <!-- Pagination -->
     <div class="pagination py-5">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -46,5 +49,10 @@
             {% endif %}
         </span>
     </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+      Brak obrazów do wyświetlenia.
+    </div>
+    {% endif %}
   </div>
 {% endblock content %}
