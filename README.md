@@ -1,5 +1,3 @@
-> A batteries-included Django starter project. To learn more try the books [Django for Beginners](https://djangoforbeginners.com), [Django for APIs](https://djangoforapis.com), and [Django for Professionals](https://djangoforprofessionals.com).
-
 ## 🚀 Features
 
 - Django 4.1 & Python 3.10
@@ -10,7 +8,6 @@
 - Debugging with [django-debug-toolbar](https://github.com/jazzband/django-debug-toolbar)
 - DRY forms with [django-crispy-forms](https://github.com/django-crispy-forms/django-crispy-forms)
 
-![Homepage](homepage_41.png)
 ----
 
 ## Table of Contents
@@ -22,11 +19,6 @@
 * [Contributing](#contributing)
 * [Support](#support)
 * [License](#license)
-
-----
-
-## 📖 Installation
-DjangoX can be installed via Pip, Pipenv, or Docker. To start, clone the repo to your local computer and change into the proper directory.
 
 ```
 $ git clone https://github.com/wsvincent/djangox.git
@@ -110,16 +102,3 @@ $ docker-compose exec web python manage.py createsuperuser
 
 I cover all of these steps in my three books: [Django for Beginners](https://djangoforbeginners.com), [Django for APIs](https://djangoforapis.com), and [Django for Professionals](https://djangoforprofessionals.com).
 
-----
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome! See [CONTRIBUTING.md](https://github.com/wsvincent/djangox/blob/master/CONTRIBUTING.md).
-
-## ⭐️ Support
-
-Give a ⭐️  if this project helped you!
-
-## License
-
-[The MIT License](LICENSE)
