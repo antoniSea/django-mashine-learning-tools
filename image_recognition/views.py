@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Image
 from django.template import loader
@@ -29,6 +29,19 @@ def train(request):
 
   return HttpResponse(template.render(context, request))
 
+def downvote(request, image_id):
+  image = Image.objects.get(id=image_id)
+  image.downvotes += 1
+  image.save()
+  
+  return redirect(request.META.get('HTTP_REFERER'))
+
+def upvote(request, image_id):
+  image = Image.objects.get(id=image_id)
+  image.upvotes += 1
+  image.save()
+
+  return redirect(request.META.get('HTTP_REFERER'))
 
 def list(request):
   template = loader.get_template('image_recognition/list.html')

@@ -6,7 +6,7 @@
 {% block content %}
 
 <!-- Display image in whole screen -->
-<div class="container text-center">
+<div class="container text-center d-flex justify-content-between">
   <div class="row">
     <div class="col-md-8">
       <div class="card mb-4 shadow-sm">
@@ -19,6 +19,33 @@
             </div>
             <small class="text-muted
             ">{{ image.timestamp }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- votes -->
+  <div>
+    <div class="p-4">
+      <h2>Głosuj na temat predykcji</h2>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <p class="card-text">Liczba głosów pozytywnych: {{ image.upvotes }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <a href="/image_recognition/zobacz/{{ image.id }}/upvote/" class="btn btn-sm btn-outline-secondary">Głosuj</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <p class="card-text">Liczba głosów negatywnych: {{ image.downvotes }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <a href="/image_recognition/zobacz/{{ image.id }}/downvote/" class="btn btn-sm btn-outline-danger">Głosuj</a>
           </div>
         </div>
       </div>
