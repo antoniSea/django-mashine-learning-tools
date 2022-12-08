@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+  <!-- form with file input and select input with class_names -->
+  <form action="/image_recognition/train" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="class_name">Wybierz klasę</label>
+      <select class="form-control" id="class_name" name="class_name">
+        {% for name in class_names %}
+        <option>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group my-4
+    ">
+      <label for="image">Wybierz zdjęcie</label>
+      <input type="file" class="form-control" id="image" name="image">
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+  </form>
+
+{% endblock %}

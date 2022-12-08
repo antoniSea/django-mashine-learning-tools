@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+  <ul class="p-4">
+    {% for name in class_names %}
+    <li>
+      {{ name }}
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

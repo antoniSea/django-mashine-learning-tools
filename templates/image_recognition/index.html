@@ -6,7 +6,9 @@
 {% block content %}
   <!-- Display all images -->
   <div class="container">
-    <a href="upload" class="btn btn-secondary m-2">Dodaj obraz</a>
+    <a href="/image_recognition/upload" class="btn btn-secondary m-2">Dodaj obraz</a>
+    <a href="/image_recognition/list" class="btn btn-secondary m-2">Lista dostępnych klasyfikacji</a>
+    <a href="/image_recognition/train" class="btn btn-secondary m-2">Trenuj</a>
     <div class="row">
       {% for image in images %}
       <div class="col-md-4">
@@ -16,7 +18,7 @@
             <p class="card-text">{{ image.label }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="zobacz/{{ image.id }}" class="btn btn-sm btn-outline-secondary">Zobacz</a>
+                <a href="/image_recognition/zobacz/{{ image.id }}" class="btn btn-sm btn-outline-secondary">Zobacz</a>
               </div>
               <small class="text-muted
               ">{{ image.timestamp }}</small>
