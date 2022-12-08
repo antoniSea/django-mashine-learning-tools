@@ -13,6 +13,7 @@ import urllib
 import base64
 import json
 from django.db.models.functions import Lower
+import sweetify
 
 def train(request):
   if request.method == 'POST':
@@ -33,13 +34,33 @@ def downvote(request, image_id):
   image = Image.objects.get(id=image_id)
   image.downvotes += 1
   image.save()
+
+  sweetify.toast(request, 'Zagłosowano pomyslnie')
   
   return redirect(request.META.get('HTTP_REFERER'))
+
+def class_name(request, class_name):
+  images = Image.objects.filter(label=class_name).order_by(Lower("timestamp").desc()).all()
+  
+  paginator = Paginator(images, 6) # Show 6 contacts per page.
+
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  template = loader.get_template('image_recognition/index.html')
+
+  context = {
+    'images': page_obj,
+    'page_obj': page_obj
+  }
+
+  return HttpResponse(template.render(context, request))
+  
 
 def upvote(request, image_id):
   image = Image.objects.get(id=image_id)
   image.upvotes += 1
   image.save()
+  sweetify.toast(request, 'Zagłosowano pomyslnie')
 
   return redirect(request.META.get('HTTP_REFERER'))
 
@@ -50,6 +71,11 @@ def list(request):
     'class_names': ['apple', 'quarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee', 'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus', 'butterfly', 'camel', 'can',
         'castle', 'caterpillar', 'cattle', 'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch', 'cra', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant', 'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house', 'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion', 'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle', 'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid', 'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree', 'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit', 'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal', 'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake', 'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper', 'table', 'tank', 'telephone', 'television', 'tiger', 'tractor', 'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale', 'willow_tree', 'wolf', 'woman', 'worm']
   }
+
+
+  query = request.GET.get('class_name')
+  if (query):
+    context['class_names'] = [x for x in context['class_names'] if query.lower() in x.lower()]
 
   return HttpResponse(template.render(context, request))
 
@@ -66,7 +92,7 @@ def index(request):
     'images': page_obj,
     'page_obj': page_obj
   }
-
+  
   return HttpResponse(template.render(context, request))
 
 def delete(request, image_id):
@@ -113,6 +139,8 @@ def upload (request):
 
     image.label = class_names[np.argmax(prediction)]
     image.save()
+
+    sweetify.toast(request, 'Pomyślnie dodano zdjęcie')
 
     return detail(request, image.id)
   else:

@@ -4,11 +4,29 @@
 {% block title %}Home page{% endblock title %}
 
 {% block content %}
-  <ul class="p-4">
-    {% for name in class_names %}
-    <li>
-      {{ name }}
-    </li>
-    {% endfor %}
-  </ul>
+  
+  <section>
+    <h1 class="display-4">Lista klas</h1>
+    <p class="mt-4 lead">Lista klas dostępnych w systemie. Kliknij, aby zobaczyć wcześniej klasyfikowane przez model obrazy.</p>
+  </section>
+
+  <!-- search bar -->
+  <section>
+    <form method="GET">
+      <div class="form-group">
+        <label for="class_name">Wyszukaj klasę</label>
+        <input type="text" class="form-control" id="class_name" name="class_name">
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <ul class="p-4">
+      {% for name in class_names %}
+      <li>
+        <a style="text-decoration: none;" href="/image_recognition/klasa/{{ name }}">{{ name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endblock %}
