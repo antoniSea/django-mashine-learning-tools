@@ -11,4 +11,5 @@ urlpatterns = [
     path('train/', views.train, name='train'),
     path('zobacz/<int:image_id>/upvote/', views.upvote, name='upvote'),
     path('zobacz/<int:image_id>/downvote/', views.downvote, name='downvote'),
+    path('klasa/<str:class_name>/', views.class_name, name='class_name')
 ]
