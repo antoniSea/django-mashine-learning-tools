@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    'sweetify',
     # Third-party
     "allauth",
     "allauth.account",
@@ -33,6 +34,8 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
 ]
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [

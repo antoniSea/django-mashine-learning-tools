@@ -10,6 +10,7 @@
   <meta name="description" content="A framework for launching new Django projects quickly.">
   <meta name="author" content="">
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
 
   {% block css %}
   <!-- Bootstrap CSS -->
@@ -69,7 +70,7 @@
 
   <div class="container">
     {% block content %}
-    <p>Default content...</p>
+      <p>Default content...</p>
     {% endblock content %}
   </div>
 
@@ -80,16 +81,19 @@
   </footer>
 
   {% block javascript %}
-  <!-- Bootstrap JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-    crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"></script>
 
-  <!-- Project JS -->
-  <script src="{% static 'js/base.js' %}"></script>
+    <!-- Project JS -->
+    <script src="{% static 'js/base.js' %}"></script>
 
-  {% endblock javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {% load sweetify %}
+    {% sweetify %}
+  {% endblock %}
 </body>
 
 </html>

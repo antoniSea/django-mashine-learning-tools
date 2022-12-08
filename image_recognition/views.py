@@ -13,6 +13,7 @@ import urllib
 import base64
 import json
 from django.db.models.functions import Lower
+import sweetify
 
 def train(request):
   if request.method == 'POST':
@@ -33,6 +34,8 @@ def downvote(request, image_id):
   image = Image.objects.get(id=image_id)
   image.downvotes += 1
   image.save()
+
+  sweetify.toast(request, 'Zagłosowano pomyslnie')
   
   return redirect(request.META.get('HTTP_REFERER'))
 
@@ -57,6 +60,7 @@ def upvote(request, image_id):
   image = Image.objects.get(id=image_id)
   image.upvotes += 1
   image.save()
+  sweetify.toast(request, 'Zagłosowano pomyslnie')
 
   return redirect(request.META.get('HTTP_REFERER'))
 
@@ -88,7 +92,7 @@ def index(request):
     'images': page_obj,
     'page_obj': page_obj
   }
-
+  
   return HttpResponse(template.render(context, request))
 
 def delete(request, image_id):
@@ -135,6 +139,8 @@ def upload (request):
 
     image.label = class_names[np.argmax(prediction)]
     image.save()
+
+    sweetify.toast(request, 'Pomyślnie dodano zdjęcie')
 
     return detail(request, image.id)
   else:
